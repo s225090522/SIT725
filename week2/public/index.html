@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dhanush Calculator</title>
+  <style>
+    body {
+      font-family:'Times New Roman', Times, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(45deg, #cb9911, #2586fc);
+    }
+
+    .calculator {
+      width: 320px;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.5em;
+      text-align: right;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      background-color: #f4f4f4;
+      box-sizing: border-box;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .buttons button {
+      padding: 20px;
+      font-size: 1.5em;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #ddd;
+    }
+
+    .buttons button:active {
+      background-color: #bbb;
+    }
+
+    .btn-equal {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .btn-equal:hover {
+      background-color: #45a049;
+    }
+
+    .btn-clear {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .btn-clear:hover {
+      background-color: #e53935;
+    }
+
+    .btn-op {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    .btn-op:hover {
+      background-color: #fb8c00;
+    }
+
+    p#result {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <h1>Dhanush Calculator</h1>
+    <input type="number" id="n1" placeholder="Enter First Number" required>
+    <input type="number" id="n2" placeholder="Enter Second Number" required>
+    
+    <div class="buttons">
+      <button type="button" id="add" class="btn-op">+</button>
+      <button type="button" id="sub" class="btn-op">-</button>
+      <button type="button" id="mul" class="btn-op">x</button>
+      <button type="button" id="div" class="btn-op">/</button>
+
+      <button type="button" id="clear" class="btn-clear">C</button>
+      <button type="button" id="equal" class="btn-equal">=</button>
+    </div>
+    
+    <p id="result">Result: </p>
+  </div>
+
+  <script>
+    function calculateResult(operation) {
+      const n1 = parseFloat(document.getElementById('n1').value);
+      const n2 = parseFloat(document.getElementById('n2').value);
+      let result;
+
+      switch(operation) {
+        case 'add':
+          result = n1 + n2;
+          break;
+        case 'sub':
+          result = n1 - n2;
+          break;
+        case 'mul':
+          result = n1 * n2;
+          break;
+        case 'div':
+          if (n2 !== 0) {
+            result = n1 / n2;
+          } else {
+            result = 'Cannot divide by zero';
+          }
+          break;
+        default:
+          result = 'Invalid operation';
+      }
+
+      document.getElementById('result').innerText = `Result: ${result}`;
+    }
+
+    document.getElementById('add').addEventListener('click', function() {
+      calculateResult('add');
+    });
+
+    document.getElementById('sub').addEventListener('click', function() {
+      calculateResult('sub');
+    });
+
+    document.getElementById('mul').addEventListener('click', function() {
+      calculateResult('mul');
+    });
+
+    document.getElementById('div').addEventListener('click', function() {
+      calculateResult('div');
+    });
+
+    document.getElementById('clear').addEventListener('click', function() {
+      document.getElementById('n1').value = '';
+      document.getElementById('n2').value = '';
+      document.getElementById('result').innerText = 'Result: ';
+    });
+  </script>
+
+</body>
+</html>
